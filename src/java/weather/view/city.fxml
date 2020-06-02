@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.Cursor?>
+
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
-
-
 <?import javafx.scene.layout.HBox?>
-<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Font?>
 <AnchorPane onKeyPressed="#handleKeyPressed" focusTraversable="true" opacity="0.91" prefHeight="80.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="weather.controller.CityController">
     <HBox spacing="10">
         <padding>

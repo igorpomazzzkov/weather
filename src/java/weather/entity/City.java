@@ -1,14 +1,17 @@
 package weather.entity;
 
 import lombok.*;
+import weather.configuration.Serialization;
 
+import java.io.Serializable;
 import java.util.Observable;
 
 @Getter
 @ToString
 @EqualsAndHashCode
-public class City extends Observable {
-    @NonNull
+
+public class City extends Observable implements Serializable {
+    protected static final long serialVersionUID = 1L;
     private String name;
     private String country;
     private String continent;

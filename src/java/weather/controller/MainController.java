@@ -8,8 +8,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import org.w3c.dom.ls.LSOutput;
 import weather.configuration.PathConfig;
+import weather.configuration.Serialization;
 import weather.entity.City;
 
 import java.io.IOException;
@@ -29,13 +29,11 @@ public class MainController implements Observer {
     @FXML
     private Label countryLabel;
 
-    public MainController(){
+    public MainController() {
+        Serialization serialization = new Serialization();
         City city = City.getInstance();
-        city.addObserver(this);
-        if(city.getName() != null){
-            this.cityLabel.setText(city.getName());
-            this.countryLabel.setText(city.getContinent() + ", " + city.getCountry());
-        }
+        City cityFromFile = (City) serialization.getObjectByDeserializable(city);
+        city.setCity(cityFromFile.getName());
     }
 
     @FXML
@@ -59,6 +57,11 @@ public class MainController implements Observer {
         } catch (IOException e) {
             System.out.println(e.fillInStackTrace());
         }
+    }
+
+    @FXML
+    public void initialize(){
+        this.cityLabel.setText(City.getInstance().getName());
     }
 
     @Override

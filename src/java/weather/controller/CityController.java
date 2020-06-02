@@ -5,6 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import weather.configuration.Serialization;
 import weather.entity.City;
 
 import java.awt.event.KeyAdapter;
@@ -36,11 +37,14 @@ public class CityController extends KeyAdapter {
 
     private void setCity(){
         City city = City.getInstance();
+        System.out.println(city.toString());
         if(!cityText.getText().isBlank()){
             city.setCity(cityText.getText());
             city.setCountry("Belarus");
             city.setContinent("Europe");
             city.notifyObservers();
+            Serialization serialization = new Serialization();
+            serialization.objectSerializable(city);
             this.cityText.getScene().getWindow().hide();
         }
     }

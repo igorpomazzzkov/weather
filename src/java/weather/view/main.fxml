@@ -10,7 +10,7 @@
    <children>
       <AnchorPane prefHeight="107.0" prefWidth="600.0" style="-fx-background-color: #8989e2;">
          <children>
-            <Label id="city-label" fx:id="cityLabel" layoutX="110.0" layoutY="31.0" prefHeight="29.0" prefWidth="123.0" text="Yout city" textFill="WHITE">
+            <Label id="city-label" fx:id="cityLabel" layoutX="110.0" layoutY="31.0" prefHeight="29.0" prefWidth="123.0" textFill="WHITE">
                <font>
                   <Font name="Roboto Slab Regular" size="22.0" />
                </font>
