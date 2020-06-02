@@ -1,14 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="weather.controller.CityController"
-            prefHeight="400.0" prefWidth="600.0">
 
+<?import javafx.scene.layout.HBox?>
+<?import javafx.geometry.Insets?>
+<AnchorPane onKeyPressed="#handleKeyPressed" focusTraversable="true" opacity="0.91" prefHeight="80.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="weather.controller.CityController">
+    <HBox spacing="10">
+        <padding>
+            <Insets top="25" bottom="25" left="10" right="10"/>
+        </padding>
+        <TextField promptText="city" prefHeight="28" prefWidth="290" fx:id="cityText" />
+        <Button fx:id="changeCityButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: mediumseagreen;" text="change" textFill="WHITE">
+            <font>
+                <Font name="Roboto Slab Regular" size="14.0" />
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND"/>
+            </cursor>
+        </Button>
+    </HBox>
 </AnchorPane>

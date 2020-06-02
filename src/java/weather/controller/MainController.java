@@ -1,13 +1,24 @@
 package weather.controller;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import org.w3c.dom.ls.LSOutput;
 import weather.configuration.PathConfig;
+import weather.entity.City;
 
-public class MainController {
+import java.io.IOException;
+import java.net.URL;
+import java.nio.file.Paths;
+import java.util.Observable;
+import java.util.Observer;
 
-    private String pathToCss = PathConfig.cssPath + "main.css";
+public class MainController implements Observer {
 
     @FXML
     private Button changeCity;
@@ -18,13 +29,51 @@ public class MainController {
     @FXML
     private Label countryLabel;
 
-    @FXML
-    public void setCity(){
-        this.cityLabel.setText("Oshmyany");
-        this.countryLabel.setText("Belarus");
+    public MainController(){
+        City city = City.getInstance();
+        city.addObserver(this);
+        if(city.getName() != null){
+            this.cityLabel.setText(city.getName());
+            this.countryLabel.setText(city.getContinent() + ", " + city.getCountry());
+        }
     }
 
-    public String getPathToCss() {
-        return pathToCss;
+    @FXML
+    public void setCity() {
+        try {
+            URL cssFilePath = Paths.get(PathConfig.cssPath + "city.css").toUri().toURL();
+            URL fxmlFilePath = Paths.get(PathConfig.fxmlPath + "city.fxml").toUri().toURL();
+
+            Parent loader = FXMLLoader.load(fxmlFilePath);
+            Scene scene = new Scene(loader);
+            scene.getStylesheets().add(cssFilePath.toString());
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setTitle("Enter city");
+            stage.setScene(scene);
+
+            stage.initOwner(this.changeCity.getScene().getWindow());
+            stage.setResizable(false);
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.show();
+        } catch (IOException e) {
+            System.out.println(e.fillInStackTrace());
+        }
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        City city = (City) arg;
+        this.cityLabel.setText(city.getName());
+        this.countryLabel.setText(setCountryLabel(city.getCountry(), city.getContinent()));
+    }
+
+    public String setCountryLabel(String country, String continents){
+        String format = "%s, %s";
+        return String.format(format, firstLetterToUpperCase(country), firstLetterToUpperCase(continents));
+    }
+
+    public String firstLetterToUpperCase(String str){
+        return str.substring(0,1).toUpperCase() + str.substring(1);
     }
 }

@@ -1,5 +1,5 @@
 *{
-    -fx-background-color: red;
+    -fx-background-color: whitesmoke;
 }
 
 #city-label, #country-label{
@@ -10,7 +10,6 @@
     -fx-background-color: white;
 }
 
-#city-button {
+Button:hover{
     -fx-background-color: red;
-    -fx-border-radius: 5px;
 }

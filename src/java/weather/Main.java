@@ -6,9 +6,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import weather.configuration.PathConfig;
 
 import java.io.File;
+import java.net.URL;
+import java.nio.file.Paths;
 
 public class Main extends Application {
     public static void main(String[] args) {
@@ -17,12 +20,13 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent loader = FXMLLoader.load(getClass().getResource("view" + File.separator + "main.fxml"));
+        URL cssFilePath = Paths.get(PathConfig.cssPath + "main.css").toUri().toURL();
+        URL fxmlFilePath = Paths.get(PathConfig.fxmlPath + "main.fxml").toUri().toURL();
+
+        Parent loader = FXMLLoader.load(fxmlFilePath);
         Scene scene = new Scene(loader);
-        File cssFile = new File(PathConfig.cssPath + "main.css");
-        scene.getStylesheets().add(cssFile.toURI().toString());
+        scene.getStylesheets().add(cssFilePath.toString());
         stage.setScene(scene);
-        System.out.println(new File(PathConfig.imagePath + "sun.png").isFile());
         File imageFile = new File(PathConfig.imagePath + "sun.png");
         Image image = new Image(imageFile.toURI().toString());
         stage.getIcons().add(image);
