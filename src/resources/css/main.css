@@ -1,5 +1,5 @@
-*{
-    -fx-background-color: whitesmoke;
+#top{
+    -fx-background-color: rgb(70, 88, 113);
 }
 
 #city-label, #country-label{

@@ -6,11 +6,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import weather.configuration.PathConfig;
-import weather.entity.City;
 
-import java.io.*;
+import java.io.File;
 import java.net.URL;
 import java.nio.file.Paths;
 

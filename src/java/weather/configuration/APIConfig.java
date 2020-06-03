@@ -3,13 +3,12 @@ package weather.configuration;
 import java.util.Map;
 
 public class APIConfig {
-    public static String GET_PLACE = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input='%s'&inputtype=textquery&fields=photos,name&key=";
-    private static String API_KEY;
+    public static String GET_CITY = "https://ip-geo-location.p.rapidapi.com/ip/%s?format=json";
+    public static String CITY_API;
 
     static {
         ProcessBuilder processBuilder = new ProcessBuilder();
         Map<String, String> env = processBuilder.environment();
-        API_KEY = env.get("PLACE_API_KEY");
-        GET_PLACE = GET_PLACE + API_KEY;
+        CITY_API = env.get("CITY_API");
     }
 }
