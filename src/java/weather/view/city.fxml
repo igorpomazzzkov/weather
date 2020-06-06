@@ -13,8 +13,8 @@
         <padding>
             <Insets top="25" bottom="25" left="10" right="10"/>
         </padding>
-        <TextField promptText="city" prefHeight="28" prefWidth="290" fx:id="cityText" />
-        <Button fx:id="changeCityButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: mediumseagreen;" text="change" textFill="WHITE">
+        <TextField prefHeight="28" prefWidth="290" fx:id="cityText" />
+        <Button fx:id="changeCityButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: mediumseagreen;" textFill="WHITE">
             <font>
                 <Font name="Roboto Slab Regular" size="14.0" />
             </font>

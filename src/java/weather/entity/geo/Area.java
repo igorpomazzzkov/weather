@@ -1,4 +1,4 @@
-package weather.entity;
+package weather.entity.geo;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

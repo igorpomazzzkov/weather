@@ -6,22 +6,29 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import weather.animation.Shake;
-import weather.configuration.APIConfig;
-import weather.configuration.PathConfig;
+import weather.configuration.ResourceBundleManager;
 import weather.configuration.Serialization;
-import weather.entity.City;
 
 import java.awt.event.KeyAdapter;
 
 public class CityController extends KeyAdapter {
+
+    private ResourceBundleManager resourceBundleManager;
+
     @FXML
     private TextField cityText;
 
     @FXML
     private Button changeCityButton;
 
+    public CityController(){
+        resourceBundleManager = ResourceBundleManager.getInstance();
+    }
+
     @FXML
     public void initialize(){
+        changeCityButton.setText(resourceBundleManager.getString("setCityButton"));
+        cityText.setPromptText(resourceBundleManager.getString("changeCityTextBoxPlaceholder"));
         changeCityButton.setOnAction(event -> {
             setCity();
         });

@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-
-
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 <BorderPane fx:controller="weather.controller.MainController" xmlns="http://javafx.com/javafx/10.0.2-internal"
-            xmlns:fx="http://javafx.com/fxml/1" prefWidth="500" prefHeight="300">
+            xmlns:fx="http://javafx.com/fxml/1" prefWidth="600" prefHeight="500">
     <top>
         <HBox id="top" alignment="CENTER" prefHeight="100" prefWidth="100">
-            <VBox>
-                <Label id="city-label" fx:id="cityLabel" layoutX="110.0" layoutY="31.0" prefHeight="29.0" prefWidth="123.0"
+            <VBox alignment="CENTER_LEFT">
+                <Label id="city-label" fx:id="cityLabel" layoutX="110.0" layoutY="31.0" prefHeight="29.0" prefWidth="200.0"
                        textFill="WHITE">
                     <font>
                         <Font name="Roboto Slab Regular" size="22.0"/>
@@ -25,8 +25,8 @@
                 </Label>
             </VBox>
             <Button onAction="#setCity" fx:id="changeCity" id="city-button" layoutX="440.0" layoutY="54.0"
-                    mnemonicParsing="false" prefHeight="30.0" prefWidth="90.0"
-                    style="-fx-background-color: mediumseagreen;" text="change city" textFill="WHITE">
+                    mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0"
+                    style="-fx-background-color: mediumseagreen;" textFill="WHITE">
                 <font>
                     <Font name="Roboto Slab Regular" size="13.0"/>
                 </font>

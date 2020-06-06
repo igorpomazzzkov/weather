@@ -1,14 +1,16 @@
-package weather.entity;
+package weather.entity.geo;
 
-import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
-@Data
+@Getter
+@Setter
 @ToString
 @EqualsAndHashCode
-public class Continent {
-    private String code;
+public class City {
     private Long geonameid;
     private String name;
+    private Long population;
 }

@@ -1,6 +1,5 @@
 package weather.controller;
 
-import com.mashape.unirest.http.exceptions.UnirestException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,12 +8,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import org.json.simple.parser.ParseException;
 import weather.api.CityAPI;
 import weather.configuration.PathConfig;
-import weather.entity.City;
-import weather.entity.GEO;
+import weather.configuration.ResourceBundleManager;
+import weather.entity.geo.GEO;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Paths;
@@ -24,6 +23,8 @@ import java.util.Observer;
 public class MainController implements Observer {
 
     private GEO geo;
+    private ResourceBundleManager resourceBundleManager;
+
 
     @FXML
     private Button changeCity;
@@ -34,10 +35,13 @@ public class MainController implements Observer {
     @FXML
     private Label countryLabel;
 
-    public MainController() throws UnirestException, ParseException {
+    public MainController() {
+        resourceBundleManager = ResourceBundleManager.getInstance();
         CityAPI c = CityAPI.getInstance();
         geo = c.getCityByLocation();
-        geo.addObserver(this);
+        if (geo != null) {
+            geo.addObserver(this);
+        }
     }
 
     @FXML
@@ -65,8 +69,19 @@ public class MainController implements Observer {
 
     @FXML
     public void initialize() {
-        this.cityLabel.setText(this.geo.getCity().getName());
-        this.countryLabel.setText(this.setCountryLabel(this.geo));
+        this.changeCity.setText(resourceBundleManager.getString("changeCityButton"));
+        if (geo != null) {
+            this.cityLabel.setText(this.geo.getCity().getName());
+            this.countryLabel.setText(this.setCountryLabel(this.geo));
+        } else {
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Error of get data",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
+            this.cityLabel.setText("City");
+            this.countryLabel.setText("Continent/Country/Region");
+        }
     }
 
     @Override

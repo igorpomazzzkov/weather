@@ -1,13 +1,12 @@
-package weather.entity;
+package weather.entity.geo;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
-import weather.configuration.Serialization;
+import weather.entity.forecast.Forecast;
 
 import java.io.Serializable;
 import java.util.Observable;
-import java.util.Observer;
 
 @Data
 @ToString
@@ -19,6 +18,7 @@ public class GEO extends Observable implements Serializable {
     private Continent continent;
     private Country country;
     private Location location;
+    private Forecast forecast;
 
     public void notifyObservers(){
         setChanged();
