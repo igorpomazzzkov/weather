@@ -1,21 +1,27 @@
 package weather;
 
+import com.jwebmp.plugins.skycons.SkyIcon;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import weather.configuration.PathConfig;
 import weather.configuration.ResourceBundleManager;
 
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Paths;
 import java.util.Locale;
 
 public class Main extends Application {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, ScriptException, NoSuchMethodException {
         ResourceBundleManager resourceBundleManager = ResourceBundleManager.getInstance();
         resourceBundleManager.changeLocale(new Locale("ru", "RU"));
         launch(args);

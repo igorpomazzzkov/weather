@@ -3,8 +3,8 @@ package weather.configuration;
 import java.util.Map;
 
 public class APIConfig {
-    public static String GET_CITY = "https://ip-geo-location.p.rapidapi.com/ip/%s?format=json";
-    public static String GET_FORECAST = "https://dark-sky.p.rapidapi.com/%f,%f?units=si";
+    public static String GET_CITY = "https://ip-geo-location.p.rapidapi.com/ip/%s?lang=%s&format=json";
+    public static String GET_FORECAST = "https://dark-sky.p.rapidapi.com/%f,%f?lang=%s&units=si";
     public static String CITY_API;
     public static String SEARCH_CITY_API;
 

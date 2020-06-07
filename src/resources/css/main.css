@@ -5,6 +5,14 @@
 #city-label, #country-label{
     -fx-background-color: transparent;
 }
+#city-button{
+    -fx-background-color: mediumseagreen;
+}
+
+#city-button:hover{
+    -fx-cursor: hand;
+    -fx-background-color: rgba(60, 179, 113, 0.8);
+}
 
 #image-view {
     -fx-background-color: white;
@@ -12,4 +20,46 @@
 
 Button:hover{
     -fx-background-color: red;
+}
+
+#borderPane {
+    -fx-background-color: linear-gradient(to bottom right, rgb(70, 88, 113) 10%, rgb(77, 110, 151) 30%, rgb(95, 122, 170) 50%, rgb(118, 149, 196) 80%);
+}
+
+#temperature, #summary, #feelsLike, #data{
+    -fx-font-style: "Times New Roman";
+}
+
+#temperature{
+    -fx-font-size: 35px;
+    -fx-font-weight: 300px;
+}
+
+#summary{
+    -fx-font-size: 25px;
+    -fx-font-weight: 200px;
+}
+
+#feelsLike{
+    -fx-font-size: 18px;
+    -fx-font-weight: 100px;
+}
+
+#data{
+    -fx-font-size: 16px;
+    -fx-font-weight: 100px;
+}
+
+#update-button{
+    -fx-background-image: url("../img/refresh.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: left;
+    -fx-pref-width: 90px;
+    -fx-background-color: transparent;
+}
+
+#update-button:hover{
+    -fx-border-width: 0 0 1 0;
+    -fx-cursor: hand;
+    -fx-underline: true;
 }

@@ -26,4 +26,8 @@ public class ResourceBundleManager {
     public String getString(String key){
         return resourceBundle.getString(key);
     }
+
+    public Locale getActiveLocale(){
+        return resourceBundle.getLocale();
+    }
 }

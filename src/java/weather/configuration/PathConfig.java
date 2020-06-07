@@ -4,7 +4,7 @@ import java.io.File;
 
 public class PathConfig {
     public static final String projectPath = System.getProperty("user.dir") + File.separator;
-    private static final String mainPath = projectPath + "src" + File.separator + "resources" + File.separator;
+    public static final String mainPath = projectPath + "src" + File.separator + "resources" + File.separator;
     public static String cssPath;
     public static String imagePath;
     public static String fxmlPath;

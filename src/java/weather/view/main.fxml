@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<BorderPane fx:controller="weather.controller.MainController" xmlns="http://javafx.com/javafx/10.0.2-internal"
-            xmlns:fx="http://javafx.com/fxml/1" prefWidth="600" prefHeight="500">
+
+<BorderPane id="borderPane" fx:id="borderPane" fx:controller="weather.controller.MainController"
+            xmlns="http://javafx.com/javafx/10.0.2-internal"
+            xmlns:fx="http://javafx.com/fxml/1"
+            prefWidth="1000" prefHeight="600">
     <top>
         <HBox id="top" alignment="CENTER" prefHeight="100" prefWidth="100">
             <VBox alignment="CENTER_LEFT">
-                <Label id="city-label" fx:id="cityLabel" layoutX="110.0" layoutY="31.0" prefHeight="29.0" prefWidth="200.0"
+                <Label id="city-label" fx:id="cityLabel" layoutX="110.0" layoutY="31.0" prefHeight="29.0"
+                       prefWidth="300.0"
                        textFill="WHITE">
                     <font>
                         <Font name="Roboto Slab Regular" size="22.0"/>
@@ -26,24 +30,59 @@
             </VBox>
             <Button onAction="#setCity" fx:id="changeCity" id="city-button" layoutX="440.0" layoutY="54.0"
                     mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0"
-                    style="-fx-background-color: mediumseagreen;" textFill="WHITE">
+                    textFill="WHITE">
                 <font>
                     <Font name="Roboto Slab Regular" size="13.0"/>
                 </font>
             </Button>
         </HBox>
-
     </top>
-    <right>
-        <Label text="RIGHT"/>
-    </right>
-    <left>
-        <Label text="LEFT"/>
-    </left>
+
+
     <center>
-        <Label text="CENTER"/>
+        <HBox id="center" spacing="25" >
+            <padding>
+                <Insets top="20" bottom="20" left="100" right="100"/>
+            </padding>
+            <VBox id="main-data-vbox" alignment="CENTER">
+                <HBox alignment="CENTER" id="image" fx:id="imageBox" prefHeight="100" prefWidth="200">
+                    <ImageView fx:id="imageView"/>
+                </HBox>
+                <VBox id="main-data" alignment="CENTER" spacing="10">
+                    <padding>
+                        <Insets bottom="30" top="30"/>
+                    </padding>
+                    <Label id="temperature" fx:id="temperatureLabel" textFill="#e6e6e6" text="18°"/>
+                    <Label id="summary" fx:id="summaryLabel" textFill="#e6e6e6" text="Mostly Cloud"/>
+                    <Label id="feelsLike" fx:id="feelsLikeLabel" textFill="#e6e6e6" text="Feels Like 18°"/>
+                    <VBox>
+                        <Label id="data" fx:id="precipInstace" textFill="#e6e6e6" text="text"/>
+                        <Label id="data" fx:id="humidity" textFill="#e6e6e6" text="text"/>
+                        <Label id="data" fx:id="windSpeed" textFill="#e6e6e6" text="text"/>
+                        <Label id="data" fx:id="windGust" textFill="#e6e6e6" text="text"/>
+                    </VBox>
+                </VBox>
+            </VBox>
+            <VBox id="data-by-hour">
+
+            </VBox>
+        </HBox>
     </center>
+
+
     <bottom>
-        <Label text="BOTTOM"/>
+        <BorderPane prefHeight="40">
+            <padding>
+                <Insets left="100" right="100"/>
+            </padding>
+            <left>
+                <HBox alignment="CENTER">
+                    <Button id="update-button" onAction="#updateData" textFill="#8ce0bd" text="refresh"/>
+                </HBox>
+            </left>
+            <right>
+                <Label text="RIGHT"/>
+            </right>
+        </BorderPane>
     </bottom>
 </BorderPane>

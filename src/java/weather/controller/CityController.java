@@ -21,12 +21,12 @@ public class CityController extends KeyAdapter {
     @FXML
     private Button changeCityButton;
 
-    public CityController(){
+    public CityController() {
         resourceBundleManager = ResourceBundleManager.getInstance();
     }
 
     @FXML
-    public void initialize(){
+    public void initialize() {
         changeCityButton.setText(resourceBundleManager.getString("setCityButton"));
         cityText.setPromptText(resourceBundleManager.getString("changeCityTextBoxPlaceholder"));
         changeCityButton.setOnAction(event -> {
@@ -35,17 +35,17 @@ public class CityController extends KeyAdapter {
     }
 
     @FXML
-    private void handleKeyPressed(KeyEvent keyEvent){
-        if(keyEvent.getCode() == KeyCode.ENTER){
+    private void handleKeyPressed(KeyEvent keyEvent) {
+        if (keyEvent.getCode() == KeyCode.ENTER) {
             setCity();
         }
-        if(keyEvent.getCode() == KeyCode.ESCAPE){
+        if (keyEvent.getCode() == KeyCode.ESCAPE) {
             this.cityText.getScene().getWindow().hide();
         }
     }
 
-    private void setCity(){
-        if(!cityText.getText().isBlank()){
+    private void setCity() {
+        if (!cityText.getText().isBlank()) {
             Serialization serialization = new Serialization();
             this.cityText.getScene().getWindow().hide();
         } else {

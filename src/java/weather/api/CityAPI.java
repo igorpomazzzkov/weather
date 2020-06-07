@@ -20,18 +20,18 @@ public class CityAPI {
     private static CityAPI cityAPI;
     private ResourceBundleManager resourceBundleManager;
 
-    private CityAPI(){
+    private CityAPI() {
         resourceBundleManager = ResourceBundleManager.getInstance();
     }
 
-    public static CityAPI getInstance(){
-        if(cityAPI == null){
+    public static CityAPI getInstance() {
+        if (cityAPI == null) {
             cityAPI = new CityAPI();
         }
         return cityAPI;
     }
 
-    public String getExternalIP()  {
+    public String getExternalIP() {
         String ip = null;
         try {
             URL url = new URL("http://checkip.amazonaws.com");
@@ -51,7 +51,7 @@ public class CityAPI {
     public GEO getCityByLocation() {
         HttpResponse<String> response = null;
         try {
-            response = Unirest.get(String.format(APIConfig.GET_CITY, getExternalIP()))
+            response = Unirest.get(String.format(APIConfig.GET_CITY, getExternalIP(), resourceBundleManager.getActiveLocale().getLanguage()))
                     .header("x-rapidapi-host", "ip-geo-location.p.rapidapi.com")
                     .header("x-rapidapi-key", APIConfig.CITY_API)
                     .asString();
@@ -73,17 +73,20 @@ public class CityAPI {
         } catch (UnirestException e) {
             return null;
         }
-        return gson.fromJson(jsonObject.toString(), GEO.class);
+        return geo;
     }
 
     public Forecast getForecastByLocation(Double lat, Double lon) throws UnirestException {
-        HttpResponse<String> response = Unirest.get(String.format(APIConfig.GET_FORECAST, lat, lon))
+        HttpResponse<String> response = Unirest.get(
+                String.format(APIConfig.GET_FORECAST,
+                        lat, lon,
+                        resourceBundleManager.getActiveLocale().getLanguage()))
                 .header("x-rapidapi-host", "dark-sky.p.rapidapi.com")
                 .header("x-rapidapi-key", APIConfig.CITY_API)
                 .asString();
         Gson gson = new Gson();
         JSONObject jsonObject = new JSONObject(response.getBody());
-        return gson.fromJson(jsonObject.toString(),
-                Forecast.class);
+        Forecast forecast = gson.fromJson(jsonObject.toString(), Forecast.class);
+        return forecast;
     }
 }

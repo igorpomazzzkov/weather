@@ -16,7 +16,8 @@ import java.util.TimeZone;
 public class ForecastDate {
     private Integer time;
     private String icon;
-    private Double precipIntensity;
+    private String summary;
+    private Double visibility;
     private Double temperature;
     private Double apparentTemperature;
     private Double humidity;
