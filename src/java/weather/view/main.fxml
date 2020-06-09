@@ -40,15 +40,15 @@
 
 
     <center>
-        <HBox id="center" spacing="25" >
+        <HBox id="center" spacing="50">
             <padding>
-                <Insets top="20" bottom="20" left="100" right="100"/>
+                <Insets top="20" bottom="20" left="50" right="50"/>
             </padding>
             <VBox id="main-data-vbox" alignment="CENTER">
                 <HBox alignment="CENTER" id="image" fx:id="imageBox" prefHeight="100" prefWidth="200">
                     <ImageView fx:id="imageView"/>
                 </HBox>
-                <VBox id="main-data" alignment="CENTER" spacing="10">
+                <VBox id="main-data" prefWidth="400" alignment="CENTER" spacing="10">
                     <padding>
                         <Insets bottom="30" top="30"/>
                     </padding>
@@ -63,9 +63,9 @@
                     </VBox>
                 </VBox>
             </VBox>
-            <VBox id="data-by-hour">
-
-            </VBox>
+            <HBox id="include-hbox">
+                <fx:include source="hourly.fxml"/>
+            </HBox>
         </HBox>
     </center>
 
@@ -81,7 +81,7 @@
                 </HBox>
             </left>
             <right>
-                <Label text="RIGHT"/>
+                <Label alignment="CENTER" text="RIGHT"/>
             </right>
         </BorderPane>
     </bottom>

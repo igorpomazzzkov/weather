@@ -5,6 +5,7 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @EqualsAndHashCode
@@ -12,5 +13,5 @@ import java.util.ArrayList;
 public class ForecastHourly {
     private String summary;
     private String icon;
-    private ArrayList<ForecastDate> data;
+    private List<ForecastDate> data;
 }

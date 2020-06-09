@@ -10,7 +10,7 @@ import java.util.Observable;
 
 @Data
 @ToString
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = false)
 public class GEO extends Observable implements Serializable {
     protected static final long serialVersionUID = 1L;
     private Area area;

@@ -1,0 +1,59 @@
+#border-pane {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-border-width: 0px;
+}
+
+.scroll-pane .viewport{
+    -fx-background-color: transparent;
+}
+
+.scroll-pane .corner{
+    -fx-background-color: transparent;
+}
+
+.scroll-bar *.increment-arrow,
+.scroll-bar *.decrement-arrow{
+    -fx-background-color: transparent;
+}
+
+.scroll-bar{
+    -fx-pref-width: 13;
+    -fx-padding: 2;
+    -fx-background-color: transparent;
+}
+
+.scroll-bar .thumb{
+    -fx-background-color: rgba(71, 71, 111, 0.8);
+
+}
+
+.scroll-bar .track{
+    -fx-border-radius: 50px;
+    -fx-border-width: 1px;
+    -fx-border-color: rgba(49, 49, 49, 0.11);
+}
+
+.scroll-bar .track:hover,
+.scroll-bar .track:focused,
+.scroll-bar .track:pressed {
+    -fx-border-radius: 50px;
+    -fx-border-width: 1px;
+    -fx-background-color: rgba(49, 49, 49, 0.24);
+    -fx-font-size: 15;
+}
+
+#label {
+    -fx-font-size: 20px;
+}
+
+#wind-label{
+    -fx-font-size: 15px;
+}
+
+#h-box:hover{
+    -fx-cursor: hand;
+    -fx-background-color: rgba(0, 0, 0, 0.2);
+    -fx-border-radius: 10px;
+    -fx-border-width: 5px;
+}

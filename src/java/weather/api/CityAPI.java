@@ -18,6 +18,7 @@ import java.util.Scanner;
 
 public class CityAPI {
     private static CityAPI cityAPI;
+    private GEO geo;
     private ResourceBundleManager resourceBundleManager;
 
     private CityAPI() {
@@ -27,6 +28,7 @@ public class CityAPI {
     public static CityAPI getInstance() {
         if (cityAPI == null) {
             cityAPI = new CityAPI();
+
         }
         return cityAPI;
     }
@@ -73,6 +75,7 @@ public class CityAPI {
         } catch (UnirestException e) {
             return null;
         }
+        geo.notifyObservers();
         return geo;
     }
 

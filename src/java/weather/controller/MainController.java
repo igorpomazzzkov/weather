@@ -8,11 +8,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import weather.api.CityAPI;
+import weather.configuration.APIConfig;
 import weather.configuration.PathConfig;
 import weather.configuration.ResourceBundleManager;
 import weather.entity.geo.GEO;
@@ -30,8 +29,6 @@ public class MainController implements Observer {
 
     private GEO geo;
     private ResourceBundleManager resourceBundleManager;
-    private final String C = "°";
-    private final String imagePath = PathConfig.imagePath + "%s.png";
 
 
     @FXML
@@ -42,9 +39,6 @@ public class MainController implements Observer {
 
     @FXML
     private Label countryLabel;
-
-    @FXML
-    private BorderPane borderPane;
 
     @FXML
     private Label temperatureLabel;
@@ -70,13 +64,16 @@ public class MainController implements Observer {
     @FXML
     private Label windGust;
 
-    public MainController() {
+    public MainController() throws MalformedURLException {
         resourceBundleManager = ResourceBundleManager.getInstance();
+        URL fxmlFilePath = Paths.get(PathConfig.fxmlPath + "hourly.fxml").toUri().toURL();
+        FXMLLoader fxmlLoader = new FXMLLoader(fxmlFilePath);
         CityAPI c = CityAPI.getInstance();
         geo = c.getCityByLocation();
         if (geo != null) {
             geo.addObserver(this);
         }
+        fxmlLoader.setController(new HourlyController(geo));
     }
 
     @FXML
@@ -84,7 +81,6 @@ public class MainController implements Observer {
         try {
             URL cssFilePath = Paths.get(PathConfig.cssPath + "city.css").toUri().toURL();
             URL fxmlFilePath = Paths.get(PathConfig.fxmlPath + "city.fxml").toUri().toURL();
-
             Parent loader = FXMLLoader.load(fxmlFilePath);
             Scene scene = new Scene(loader);
             scene.getStylesheets().add(cssFilePath.toString());
@@ -103,7 +99,7 @@ public class MainController implements Observer {
     }
 
     @FXML
-    public void initialize() throws MalformedURLException {
+    public void initialize() {
         if (geo != null) {
             initComponent();
         } else {
@@ -119,7 +115,6 @@ public class MainController implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        GEO geo = (GEO) arg;
         this.cityLabel.setText(geo.getCity().getName());
         this.countryLabel.setText(setCountryLabel(geo));
     }
@@ -146,10 +141,10 @@ public class MainController implements Observer {
         this.cityLabel.setText(this.geo.getCity().getName());
         this.countryLabel.setText(this.setCountryLabel(this.geo));
 
-        String temp = this.geo.getForecast().getCurrently().getTemperature() + this.C;
+        String temp = this.geo.getForecast().getCurrently().getTemperature() + APIConfig.C;
         String sum = this.geo.getForecast().getCurrently().getSummary();
         String feels = resourceBundleManager.getString("feelsLike") + " " +
-                this.geo.getForecast().getCurrently().getApparentTemperature() + C;
+                this.geo.getForecast().getCurrently().getApparentTemperature() + APIConfig.C;
         String precip = resourceBundleManager.getString("visibility") + " " +
                 this.geo.getForecast().getCurrently().getVisibility() + " " +
                 resourceBundleManager.getString("windSpeedSI");
@@ -170,15 +165,8 @@ public class MainController implements Observer {
         this.humidity.setText(humidity);
         this.windSpeed.setText(windSpeed);
         this.windGust.setText(windGust);
-
-        File file = new File(String.format(imagePath, geo.getForecast().getCurrently().getIcon()));
-        Image image = null;
-        try {
-            image = new Image(file.toURI().toURL().toString(), true);
-            imageView.setImage(image);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
+        Image image = APIConfig.getImage(geo.getForecast().getCurrently().getIcon());
+        imageView.setImage(APIConfig.getImage(geo.getForecast().getCurrently().getIcon()));
     }
 
     @FXML
@@ -186,6 +174,5 @@ public class MainController implements Observer {
         CityAPI cityAPI = CityAPI.getInstance();
         this.geo = cityAPI.getCityByLocation();
         initComponent();
-        System.out.println("Refresh");
     }
 }
