@@ -9,6 +9,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import weather.api.CityAPI;
 import weather.configuration.APIConfig;
 import weather.configuration.ResourceBundleManager;
 import weather.entity.forecast.ForecastDate;
@@ -31,10 +32,11 @@ public class HourlyController implements Observer {
     private GEO geo;
     private ResourceBundleManager resourceBundleManager;
 
-    public HourlyController(GEO geo) {
+    public HourlyController() {
         resourceBundleManager = ResourceBundleManager.getInstance();
-        this.geo = geo;
-        geo.addObserver(this);
+        CityAPI cityAPI = CityAPI.getInstance();
+        cityAPI.addObserver(this);
+        this.geo = cityAPI.getGeo();
         ScrollBar scrollBar = new ScrollBar();
         scrollBar.setOrientation(Orientation.VERTICAL);
         this.mainBox = new ScrollPane(scrollBar);
@@ -57,7 +59,6 @@ public class HourlyController implements Observer {
         hBox.setSpacing(50);
 
         ForecastDate forecastDate = geo.getForecast().getHourly().getData().get(i);
-        System.out.println(forecastDate.getVisibility());
         String time = String.format("%tH.%<tM", forecastDate.getDateTime());
         String temp = String.format("%s" + APIConfig.C, forecastDate.getTemperature());
         String wind = String.format("%.2f" + resourceBundleManager.getString("windSpeedSI"), forecastDate.getWindGust());
@@ -90,6 +91,9 @@ public class HourlyController implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         GEO geo = (GEO) arg;
+        this.setGeo(geo);
+        this.vBox.getChildren().clear();
+        this.initialize();
     }
 
     public void setGeo(GEO geo) {

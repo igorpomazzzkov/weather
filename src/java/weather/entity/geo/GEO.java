@@ -11,7 +11,7 @@ import java.util.Observable;
 @Data
 @ToString
 @EqualsAndHashCode(callSuper = false)
-public class GEO extends Observable implements Serializable {
+public class GEO implements Serializable {
     protected static final long serialVersionUID = 1L;
     private Area area;
     private City city;
@@ -19,9 +19,4 @@ public class GEO extends Observable implements Serializable {
     private Country country;
     private Location location;
     private Forecast forecast;
-
-    public void notifyObservers(){
-        setChanged();
-        notifyObservers(this);
-    }
 }

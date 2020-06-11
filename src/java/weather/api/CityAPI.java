@@ -14,9 +14,10 @@ import javax.swing.*;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.Observable;
 import java.util.Scanner;
 
-public class CityAPI {
+public class CityAPI extends Observable {
     private static CityAPI cityAPI;
     private GEO geo;
     private ResourceBundleManager resourceBundleManager;
@@ -57,6 +58,7 @@ public class CityAPI {
                     .header("x-rapidapi-host", "ip-geo-location.p.rapidapi.com")
                     .header("x-rapidapi-key", APIConfig.CITY_API)
                     .asString();
+            System.out.println(response.getStatusText());
         } catch (UnirestException e) {
             JOptionPane.showMessageDialog(
                     null,
@@ -68,6 +70,7 @@ public class CityAPI {
         Gson gson = new Gson();
         JSONObject jsonObject = new JSONObject(response.getBody());
         GEO geo = gson.fromJson(jsonObject.toString(), GEO.class);
+        System.out.println(geo);
         Double lat = geo.getLocation().getLatitude();
         Double lon = geo.getLocation().getLongitude();
         try {
@@ -75,8 +78,9 @@ public class CityAPI {
         } catch (UnirestException e) {
             return null;
         }
-        geo.notifyObservers();
-        return geo;
+        this.geo = geo;
+        this.notifyObservers();
+        return this.geo;
     }
 
     public Forecast getForecastByLocation(Double lat, Double lon) throws UnirestException {
@@ -91,5 +95,14 @@ public class CityAPI {
         JSONObject jsonObject = new JSONObject(response.getBody());
         Forecast forecast = gson.fromJson(jsonObject.toString(), Forecast.class);
         return forecast;
+    }
+
+    public GEO getGeo() {
+        return geo;
+    }
+
+    public void notifyObservers(){
+        setChanged();
+        notifyObservers(this.geo);
     }
 }

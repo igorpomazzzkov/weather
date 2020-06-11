@@ -1,8 +1,6 @@
 package weather.configuration;
 
 import java.io.File;
-import java.net.URL;
-import java.nio.file.Paths;
 
 public class PathConfig {
     public static final String projectPath = System.getProperty("user.dir") + File.separator;

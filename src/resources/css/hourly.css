@@ -53,7 +53,9 @@
 
 #h-box:hover{
     -fx-cursor: hand;
-    -fx-background-color: rgba(0, 0, 0, 0.2);
-    -fx-border-radius: 10px;
-    -fx-border-width: 5px;
+    -fx-border-radius: 50px;
+    -fx-border-width: 20px;
+    -fx-background-color: rgba(0, 0, 0, 0.1);
+    -fx-background-radius: rgba(0, 0, 0, 0.1);
+    -fx-font-size: 15;
 }

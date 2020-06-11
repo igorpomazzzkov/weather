@@ -7,17 +7,13 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import weather.configuration.PathConfig;
-import weather.configuration.ResourceBundleManager;
 
 import java.io.File;
 import java.net.URL;
 import java.nio.file.Paths;
-import java.util.Locale;
 
 public class Main extends Application {
     public static void main(String[] args) {
-        ResourceBundleManager resourceBundleManager = ResourceBundleManager.getInstance();
-        resourceBundleManager.changeLocale(new Locale("ru", "RU"));
         launch(args);
     }
 

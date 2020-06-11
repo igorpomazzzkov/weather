@@ -17,7 +17,6 @@ import weather.configuration.ResourceBundleManager;
 import weather.entity.geo.GEO;
 
 import javax.swing.*;
-import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -29,7 +28,6 @@ public class MainController implements Observer {
 
     private GEO geo;
     private ResourceBundleManager resourceBundleManager;
-
 
     @FXML
     private Button changeCity;
@@ -64,16 +62,13 @@ public class MainController implements Observer {
     @FXML
     private Label windGust;
 
-    public MainController() throws MalformedURLException {
+    public MainController() {
         resourceBundleManager = ResourceBundleManager.getInstance();
-        URL fxmlFilePath = Paths.get(PathConfig.fxmlPath + "hourly.fxml").toUri().toURL();
-        FXMLLoader fxmlLoader = new FXMLLoader(fxmlFilePath);
         CityAPI c = CityAPI.getInstance();
         geo = c.getCityByLocation();
         if (geo != null) {
-            geo.addObserver(this);
+            c.addObserver(this);
         }
-        fxmlLoader.setController(new HourlyController(geo));
     }
 
     @FXML
@@ -99,7 +94,7 @@ public class MainController implements Observer {
     }
 
     @FXML
-    public void initialize() {
+    public void initialize() throws MalformedURLException {
         if (geo != null) {
             initComponent();
         } else {
@@ -115,6 +110,7 @@ public class MainController implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
+        GEO geo = (GEO) arg;
         this.cityLabel.setText(geo.getCity().getName());
         this.countryLabel.setText(setCountryLabel(geo));
     }
@@ -170,7 +166,7 @@ public class MainController implements Observer {
     }
 
     @FXML
-    public void updateData(){
+    public void updateData() {
         CityAPI cityAPI = CityAPI.getInstance();
         this.geo = cityAPI.getCityByLocation();
         initComponent();

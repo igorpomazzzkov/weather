@@ -23,7 +23,6 @@ public class APIConfig {
 
     public static Image getImage(String icon){
         File file = new File(String.format(imagePath, icon));
-        System.out.println(file.isFile());
         Image image = null;
         try {
             return image = new Image(file.toURI().toURL().toString(), true);
